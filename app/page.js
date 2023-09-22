@@ -6,69 +6,42 @@ import { useRouter } from "next/navigation";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Link from "next/link";
+import HeroCard from "./components/HeroCard";
 
 export default function Home() {
-  const [user, setUser] = useState("");
-
-  const router = useRouter();
-
-  useEffect(() => {
-    setUser(localStorage.getItem("user"));
-
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange(() => {
-      router.refresh();
-    });
-
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, []);
-
-  const handleLogout = async () => {
-    localStorage.removeItem("user");
-    setUser("");
-    const { error } = await supabase.auth.signOut();
-    console.log("error", error);
-  };
+  
 
   return (
-    <div className="row min-h-screen">
-      <div className="container mx-auto px-1 py-2 col-6 w-full	content-center">
-        {user && (
-          <div className="header text-left container m-auto w-full">
-            <h1>{user}</h1>
-            <Button onClick={handleLogout}>Logout</Button>
-          </div>
-        )}
-      </div>
+    <div className="row min-h-screen p-2 rounded-lg">
+      <HeroCard />
       <div>
         <Carousel
           autoPlay
           infiniteLoop
-          showStatus={false}
-          className="w-100 mx-auto"
+          showStatus={true}
+          className="w-full shadow-lg"
         >
-          <div className="h-[400px] md:h-[500px] bg-slate-400">
+          <div className="h-96 md:h-96 rounded-lg bg-slate-400">
             <img
-              src="https://media.istockphoto.com/id/1279519781/photo/foods-to-lower-cholesterol-shot-on-white-table.jpg?s=2048x2048&w=is&k=20&c=b3AjYTx2jYR7ZxJgP0tWRR7gyF25-OW4SoBDbAT2sf4="
-              alt="Carousel Image 3"
-            />
-          </div>
-          <div className="h-[400px] md:h-[500px] bg-slate-400">
-            <img
-              src="https://www.foodiesfeed.com/wp-content/uploads/2023/07/healthy-foods.jpg"
-              alt="Carousel Image 1"
-            />
-          </div>
-          <div className="h-[400px] md:h-[500px] bg-slate-400">
-            <img
-              src="https://media.istockphoto.com/id/1156129985/photo/group-of-gujarati-snacks-like-jalebi-fafda-thepla-khaman-dhokla-aloo-bhujiya-khandvi-khakra.jpg?s=2048x2048&w=is&k=20&c=D2Px_jDZdonNZyM8WgoyL4y2ejtQoHebqW8SOC5q0tQ="
+              src="https://wallpapers.com/images/featured/burrito-v4i6nj2atgivsstd.jpg"
               alt="Carousel Image 2"
+              className="w-full h-full object-cover rounded-lg"
             />
           </div>
-          
+          <div className="h-96 md:h-96 rounded-lg bg-slate-400">
+            <img
+              src="https://wallpapers.com/images/hd/italian-food-vegetables-pizza-3e0s2waqcquftbc8.jpg"
+              alt="Carousel Image 3"
+              className="w-full h-full object-cover rounded-lg"
+            />
+          </div>
+          <div className="h-96 md:h-96 rounded-lg bg-slate-400">
+            <img
+              src="https://wallpapers.com/images/featured/food-ccsaubvss63lkcyb.jpg"
+              alt="Carousel Image 1"
+              className="w-full h-full object-cover rounded-lg"
+            />
+          </div>
         </Carousel>
 
         <div className="container mx-auto mt-8">
@@ -81,7 +54,9 @@ export default function Home() {
                 alt="Food Image 1"
                 className="w-full h-48 object-cover rounded-md"
               />
-              <h2 className="text-xl font-semibold mt-2">Delicious Bagel With Egg</h2>
+              <h2 className="text-xl font-semibold mt-2">
+                Delicious Bagel With Egg
+              </h2>
               <p className="text-gray-600">
                 Try our mouthwatering Delicious Bagel With Egg recipes.
               </p>
@@ -107,7 +82,9 @@ export default function Home() {
                 alt="Food Image 3"
                 className="w-full h-48 object-cover rounded-md"
               />
-              <h2 className="text-xl font-semibold mt-2">Avocado Egg Open Sandwich</h2>
+              <h2 className="text-xl font-semibold mt-2">
+                Avocado Egg Open Sandwich
+              </h2>
               <p className="text-gray-600">
                 Indulge in our Avocado Egg Open Sandwich creations.
               </p>

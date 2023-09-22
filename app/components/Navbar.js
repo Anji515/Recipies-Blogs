@@ -1,15 +1,18 @@
+'use client'
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { GiCancel, GiHamburgerMenu } from 'react-icons/gi';
 
-const Navbar = () => {
+const Navbar = ({session,handleLogout,user}) => {
+
+  console.log('session',session.session,'navbar',user)
 
   let [open,setOpen]=useState(false);
 
   return (
-    <nav className='shadow-md w-full fixed top-0 left-0'>
+    <nav className='shadow-md w-full fixed top-0 left-0 z-[99]'>
       <div className='md:flex items-center justify-between bg-white py-1 md:px-10 px-7'>
       <div className='font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 
       text-gray-800'>
@@ -41,14 +44,20 @@ const Navbar = () => {
         <Link href="/recipes">
           <span className="hover:underline cursor-pointer">Recipes</span>
         </Link>
-        <Link href="/login">
+        {session.session && (
+          <div className="flex items-center header text-left container m-auto w-full">
+            <h1>{user}</h1>
+            <Button onClick={handleLogout}>Logout</Button>
+          </div>
+        )}
+        { !session.session && <Link href="/login">
           <Button className="hover:underline hover:bg-gray-300 cursor-pointer text-black bg-slate-200">
             Log In
           </Button>
-        </Link>
-        <Link href="/signup">
+        </Link>}
+         {!session.session && <Link href="/signup">
           <Button className="hover:underline cursor-pointer">Sign Up</Button>
-        </Link>
+        </Link>}
       </div>
       </div>
       </div>

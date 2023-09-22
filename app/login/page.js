@@ -12,13 +12,14 @@ import {
 } from "@/components/ui/alert"
 import { AlertCircle} from "lucide-react"
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-
+import { useRouter } from 'next/navigation';
 
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError]=useState('');
+  const router = useRouter()
   const [toggleShowPassword, settoggleShowPassword]=useState(false);
 
   const handleSubmit = async (e) => {
@@ -30,6 +31,14 @@ const LoginForm = () => {
     if (!error) {
       localStorage.setItem('token',data.session.access_token)
       localStorage.setItem('user',data.user.email)
+      router.refresh()
+
+      const {
+        data: { subscription },
+      } = supabase.auth.onAuthStateChange(() => {
+        router.refresh();
+      });
+
     }else{
       setError(error.message);
       console.log("error: " + error.message);
