@@ -7,9 +7,11 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Link from "next/link";
 import HeroCard from "./components/HeroCard";
+import CarouselCard from "./components/CaroselCard";
+import recipes from "./Data/data";
 
 export default function Home() {
-  
+
 
   return (
     <div className="row min-h-screen p-2 rounded-lg">
@@ -109,6 +111,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <CarouselCard recipes={recipes}/>
     </div>
   );
 }
