@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { FaArrowCircleLeft, FaArrowCircleRight } from 'react-icons/fa';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
@@ -23,17 +24,16 @@ const CarouselCard = ({ recipes }) => {
           <button
             type="button"
             onClick={onClickHandler}
-            // title={label}
             style={{
               position: 'absolute',
               top: '50%',
               left: '10px',
               zIndex: '2',
-              fontSize:'38px',
-              color:'teal'
+              fontSize: '38px',
+              color: 'white',
             }}
           >
-            <FaArrowCircleLeft/>
+            <FaArrowCircleLeft className='bg-teal-600 rounded-full p-[2px]' />
           </button>
         )
       }
@@ -42,33 +42,34 @@ const CarouselCard = ({ recipes }) => {
           <button
             type="button"
             onClick={onClickHandler}
-            // title={label}
             style={{
               position: 'absolute',
               top: '50%',
               right: '10px',
               zIndex: '2',
-              fontSize:'38px',
-              color:'teal'
+              fontSize: '38px',
+              color: 'white',
             }}
           >
-            <FaArrowCircleRight/>
+            <FaArrowCircleRight className='bg-teal-600 rounded-full p-[2px]' />
           </button>
         )
       }
     >
       {groupedRecipes.map((group) => (
-        <div key={Math.floor(Math.random() * 100)} className="p-20 bg-gray-300 h-[580px]">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div key={Math.floor(Math.random() * 100)} className="p-4 md:p-6 lg:p-8 bg-gray-100">
+          <div className="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-4 gap-1 md:gap-4">
             {group.map((recipe, index) => (
-              <div key={recipe.id} className="h-[400px] border border-grey-500 p-4 rounded-md shadow-lg">
-                <img
+              <div key={recipe.id} className="h-[180px] md:h-[400px] border border-grey-500 p-1 md:p-4 rounded-md shadow-lg">
+                <Image
+                  width={400}
+                  height={350}
                   src={recipe.imageSrc}
                   alt={recipe.title}
-                  className="w-3/5 h-[250px] rounded-md shadow-lg"
+                  className="w-[100%] md:w-full h-[100px] md:h-[250px] object-cover rounded-md shadow-lg"
                 />
-                <h2 className="text-lg font-semibold mt-2 text-left text-orange-600">{recipe.title}</h2>
-                <p className="text-gray-600 text-left">{recipe.description}</p>
+                <h2 className="text-[12px] md:text-lg font-semibold mt-2 text-left text-orange-600">{recipe.title}</h2>
+                <p className="text-gray-600 text-left hidden md:block">{recipe.description}</p>
               </div>
             ))}
           </div>

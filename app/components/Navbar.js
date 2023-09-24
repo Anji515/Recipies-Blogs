@@ -5,9 +5,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { GiCancel, GiHamburgerMenu } from 'react-icons/gi';
 
-const Navbar = ({session,handleLogout,user}) => {
-
-  console.log('session',session.session,'navbar',user)
+const Navbar = ({handleLogout,user}) => {
 
   let [open,setOpen]=useState(false);
 
@@ -33,7 +31,7 @@ const Navbar = ({session,handleLogout,user}) => {
        {open ? <GiCancel/>:<GiHamburgerMenu />}
       </div>
 
-      <div className={`md:flex md:items-center md:pb-0 gap-10x pb-12 absolute md:static bg-white md:z-auto z-[-1] right-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? 'top-10 p-12 lg:p-0':'top-[-490px]'}`}>
+      <div className={`md:flex md:items-center md:pb-0 gap-10 pb-12 absolute md:static bg-white md:z-auto z-[-1] right-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? 'top-10 p-12 lg:p-0':'top-[-490px]'}`}>
       <div className="flex flex-col md:gap-10 gap-2 md:flex-row md:items-center items-right md:pb-0">
         <Link href="/about">
           <span className="hover:underline cursor-pointer">About</span>
@@ -44,18 +42,18 @@ const Navbar = ({session,handleLogout,user}) => {
         <Link href="/recipes">
           <span className="hover:underline cursor-pointer">Recipes</span>
         </Link>
-        {session.session && (
-          <div className="flex items-center header text-left container m-auto w-full">
+        {user && (
+          <div className="flex items-center header text-left container m-auto w-full gap-10">
             <h1>{user}</h1>
             <Button onClick={handleLogout}>Logout</Button>
           </div>
         )}
-        { !session.session && <Link href="/login">
+        { !user && <Link href="/login">
           <Button className="hover:underline hover:bg-gray-300 cursor-pointer text-black bg-slate-200">
             Log In
           </Button>
         </Link>}
-         {!session.session && <Link href="/signup">
+         {!user && <Link href="/signup">
           <Button className="hover:underline cursor-pointer">Sign Up</Button>
         </Link>}
       </div>

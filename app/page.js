@@ -1,8 +1,4 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
-import { supabase } from "./supabase";
-import { useRouter } from "next/navigation";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Link from "next/link";
@@ -111,6 +107,8 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      
       <CarouselCard recipes={recipes}/>
     </div>
   );

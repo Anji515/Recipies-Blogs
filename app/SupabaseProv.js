@@ -12,7 +12,7 @@ export default function SupabaseProvider({
   const [user, setUser] = useState(null);
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
-  console.log('user', user);
+  // console.log('user', user);
 
   useEffect(() => {
     const {

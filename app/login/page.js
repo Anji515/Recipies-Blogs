@@ -20,7 +20,11 @@ const LoginForm = () => {
   const [password, setPassword] = useState('');
   const [error, setError]=useState('');
   const router = useRouter()
+  
   const [toggleShowPassword, settoggleShowPassword]=useState(false);
+  const togglePasswordVisibility = () => {
+    settoggleShowPassword(!toggleShowPassword);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,16 +33,8 @@ const LoginForm = () => {
       password:password,
     })
     if (!error) {
-      localStorage.setItem('token',data.session.access_token)
-      localStorage.setItem('user',data.user.email)
-      router.refresh()
-
-      const {
-        data: { subscription },
-      } = supabase.auth.onAuthStateChange(() => {
-        router.refresh();
-      });
-
+      alert('Login successful')
+      router.push('/')
     }else{
       setError(error.message);
       console.log("error: " + error.message);
@@ -46,23 +42,9 @@ const LoginForm = () => {
     console.log('data', data);
   };
 
-  const handleGoogleLogin = async()=>{
-    
-   const { data, error } = await supabase.auth.signInWithOAuth({
-     provider: 'google',
-     options: {
-         redirectTo: 'http://localhost:3000/auth/callback'
-       } 
-    })
-    console.log('data', data)
-  }
-
-  const togglePasswordVisibility = () => {
-    settoggleShowPassword(!toggleShowPassword);
-  };
 
   return (
-    <div className='flex w-2/5 flex-col mx-auto items-center justify-between p-24 bg-gray-500 rounded-md'>
+    <div className='flex w-2/5 flex-col mx-auto items-center justify-between p-24 bg-gray-500 rounded-md m-20'>
       <h1 className='text-3xl font-bold text-white'>Login</h1>
     <form onSubmit={handleSubmit} className='flex w-4/5 flex-col mx-auto justify-between p-14 bg-gray-500 rounded-md'>
       <Label>Email</Label>
@@ -71,13 +53,10 @@ const LoginForm = () => {
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-
-      />
-      <br/>
-      
+        className='mb-6'
+      />     
       <Label>Password</Label>
-      <div className="relative">
-
+      <div className="relative mb-6">
       <Input
           className="w-full pr-12 py-2 pl-4 rounded border border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
           type={toggleShowPassword ? 'text' : 'password'}
@@ -89,7 +68,6 @@ const LoginForm = () => {
           {toggleShowPassword ? <FaEye size={'22px'}/> : <FaEyeSlash size={'22px'}/>}
       </span>
       </div>
-      <br/>
       <Button type="submit">Login</Button>
     </form>
     <br/>
@@ -102,7 +80,7 @@ const LoginForm = () => {
     </Alert> }
     <br/>
     <h1>If you don't account ? please do <Link href={'signup'} >Signup</Link></h1>
-    <Button onClick={handleGoogleLogin}>Google</Button>
+    <Button >Google</Button>
     </div>
   );
 };

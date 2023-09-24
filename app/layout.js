@@ -11,52 +11,32 @@ import { useRouter } from 'next/navigation'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function RootLayout({ children }) {
-
-  const [user, setUser] = useState("");
-  const [session, setSession] = useState(false)
-
   const router = useRouter();
-  const getSession = async () => {
-    const { data, error } = await supabase.auth.getSession()
-    if (error) {
-      console.error(error)
-    } else {
-      console.log('session',data)
-      router.refresh();
-      setSession(data)
-    }
-  }
 
-  useEffect(() => {
-    setUser(localStorage.getItem("user"));
-    getSession()
-
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange(() => {
-      router.refresh();
-    });
-
-    console.log('sub',subscription)
-
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, [user]);
+  const [username, setUsername] = useState('')
+  // console.log('userName',username)
+  useEffect(()=>{
+    supabase.auth.onAuthStateChange((_, session) => {
+      if (session) {
+        router.push('/')
+        setUsername(session.user)
+      } else {
+        setUsername(null)
+      }
+    }) 
+  },[])
 
   const handleLogout = async () => {
-    localStorage.removeItem("user");
-    setUser("");
     const { error } = await supabase.auth.signOut();
     console.log("error", error);
+    alert('Logout successful !')
   };
 
 
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar handleLogout={handleLogout} session={session} user={user}/>
-        <br/>
+        <Navbar handleLogout={handleLogout} user={username ? username.email : null}/>
         <br/>
         <br/>
         <SupabaseProvider>

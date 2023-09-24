@@ -75,6 +75,8 @@
   }
 }
 
+/* Home-page , Here card css*/
+
 .animate-spin-slow {
   animation: spin 10s linear infinite;
 }
@@ -87,3 +89,4 @@
     transform: rotate(360deg);
   }
 }
+
