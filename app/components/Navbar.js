@@ -1,13 +1,41 @@
 'use client'
-import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { GiCancel, GiHamburgerMenu } from 'react-icons/gi';
+import { usePathname, useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react'
+import { supabase } from '../supabase';
 
-const Navbar = ({handleLogout,user}) => {
+const Navbar = () => {
 
   let [open,setOpen]=useState(false);
+    const PATH=usePathname()
+    const router=useRouter()
+  
+    const [username, setUsername] = useState('')
+    console.log('userNameNavbar',username?.app_metadata?.provider == 'github')
+
+    useEffect(()=>{
+      supabase.auth.onAuthStateChange((_, session) => {
+        if(PATH=='/profile'){
+          router.push('/profile')
+        }
+        if (session ) {
+          setUsername(session.user)
+        } else {
+          setUsername(null)
+        }
+      }) 
+      // console.log('navbarData',data)
+    },[])
+  
+    const handleLogout = async () => {
+      const { error } = await supabase.auth.signOut();
+      console.log("error", error);
+      alert('Logout successful !')
+      // router.push('/')
+    };
 
   return (
     <nav className='shadow-md w-full fixed top-0 left-0 z-[99]'>
@@ -42,18 +70,34 @@ const Navbar = ({handleLogout,user}) => {
         <Link href="/recipes">
           <span className="hover:underline cursor-pointer">Recipes</span>
         </Link>
-        {user && (
+        {username?.app_metadata?.provider == 'github' &&
           <div className="flex items-center header text-left container m-auto w-full gap-10">
-            <h1>{user}</h1>
+            <Link href='/profile'>
+          <div className='flex justify-between items-center gap-2'>
+              <img
+              src={username?.user_metadata?.avatar_url} // Replace with the URL of the user's avatar image
+              alt="User Avatar"
+              className="w-16 h-16 rounded-full"
+              />
+            <h2 className="text-xl font-semibold">{username?.user_metadata?.user_name}</h2>
+              </div>
+            </Link>
             <Button onClick={handleLogout}>Logout</Button>
+          </div>}
+          {username?.app_metadata?.provider == 'email' && <div className='flex justify-between items-center gap-2'>
+            <Link href='/profile'>
+          <h2 className="text-xl font-semibold">{username?.email}</h2>
+          </Link>
+          <Button onClick={handleLogout}>Logout</Button>
           </div>
-        )}
-        { !user && <Link href="/login">
+          }
+
+        { !username?.email && <Link href="/login">
           <Button className="hover:underline hover:bg-gray-300 cursor-pointer bg-zinc-100 border border-white text-black">
             Log In
           </Button>
         </Link>}
-         {!user && <Link href="/signup">
+         {!username?.email && <Link href="/signup">
           <Button className="hover:underline cursor-pointer">Sign Up</Button>
         </Link>}
       </div>

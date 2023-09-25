@@ -1,48 +1,35 @@
-'use client'
+
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
 import { FaCheckSquare} from "react-icons/fa";
 import Loader from "../../components/Loader";
 import Client from "@/app/Contentful";
 
-const Page = ({ params }) => {
+const Page = async ({ params }) => {
+  let item;
+  try{
+       
+       item = await Client.getEntries(
+         {
+           content_type: "recipe",
+           "fields.slug": params.slug,
+         },
+         {
+           next: { revalidate: 10 } 
+         }
+       );
+     
+      //  console.log('item',item?.items[0].fields);
+
+     }catch(err){
+
+     }
   
-  const [recipe, setRecipe] = useState({});
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const fetchRecipe = async () => {
-      setLoading(true)
-      try{
-        const item = await Client.getEntries(
-          {
-            content_type: "recipe",
-            "fields.slug": params.slug,
-          },
-          {
-            next: { revalidate: 10 } 
-          }
-        );
-
-        console.log('item',item);
-        setRecipe(item?.items[0].fields)
-        setLoading(false);
-      }catch(e){
-       console.log('error',e);
-      }
-    }
-    fetchRecipe();
-  },[])
-
-
-  const { featuredImage, cookingTime, title, ingredients, methode } = recipe;
-
-  console.log('recipe', recipe);
+  const { featuredImage, cookingTime, title, ingredients, methode } = item.items[0].fields;
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-300 to-pink-300 "> 
-    { loading ? <Loader /> : (recipe && <div className="w-full p-10 text-center py-20">
+    { item?.items[0].fields ? (<div className="w-full p-10 text-center py-20">
       <h1 className="text-4xl font-extrabold text-black mb-6 animate__animated animate__fadeIn animate__delay-1s">
         {title}
       </h1>
@@ -78,8 +65,7 @@ const Page = ({ params }) => {
         </Button>
         <p className="w-[95%] mx-auto">{methode?.content[0]?.content[1]?.value}</p>
       </div>
-    </div>)
-    }
+    </div> ) : <Loader/> }
     </div>
   );
 };

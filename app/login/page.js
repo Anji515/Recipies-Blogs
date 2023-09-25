@@ -34,13 +34,25 @@ const LoginForm = () => {
     })
     if (!error) {
       alert('Login successful')
-      router.push('/')
+      console.log('login data', data)
+      if(data?.user?.aud==="authenticated"){
+        router.push('/')
+      }
     }else{
       setError(error.message);
       console.log("error: " + error.message);
     }
-    console.log('data', data);
   };
+
+  const handleGithubLogin=async()=>{
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'github'
+    })
+    if(data?.user?.aud==="authenticated"){
+      router.push('/')
+    }
+    console.log('github', data)
+  }
 
 
   return (
@@ -68,6 +80,7 @@ const LoginForm = () => {
           {toggleShowPassword ? <FaEye size={'22px'}/> : <FaEyeSlash size={'22px'}/>}
       </span>
       </div>
+      <h1 className="text-blue-900 font-bold"><Link href='/recovery'>Forgot Password ?</Link></h1>
       <Button type="submit">Login</Button>
     </form>
     <br/>
@@ -80,7 +93,7 @@ const LoginForm = () => {
     </Alert> }
     <br/>
     <h1>If you don't account ? please do <Link href={'signup'} >Signup</Link></h1>
-    <Button >Google</Button>
+    <Button onClick={handleGithubLogin}>Github</Button>
     </div>
   );
 };
