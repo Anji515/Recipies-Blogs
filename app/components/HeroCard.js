@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 const HeroCard = () => {
@@ -14,7 +15,9 @@ const HeroCard = () => {
               Explore a world of delicious recipes and culinary creativity with our app.
             </p>
             <button className="bg-yellow-500 text-blue-900 hover:bg-yellow-400 hover:text-blue-800 rounded-lg px-4 py-2 mt-6 font-semibold">
-              Learn More
+              <Link href="/recipes">
+              Explore More
+              </Link>
             </button>
           </div>
           <div className="flex w-full md:w-2/5 mx-auto justify-center items-center ">

@@ -57,7 +57,7 @@ const CarouselCard = ({ recipes }) => {
       }
     >
       {groupedRecipes.map((group) => (
-        <div key={Math.floor(Math.random() * 100)} className="p-4 md:p-6 lg:p-8 bg-gray-100">
+        <div key={Math.floor(Math.random() * 100)} className="p-4 md:p-6 lg:p-8 bg-gradient-to-r from-blue-200 to-orange-200">
           <div className="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-4 gap-1 md:gap-4">
             {group.map((recipe, index) => (
               <div key={recipe.id} className="h-[180px] md:h-[400px] border border-grey-500 p-1 md:p-4 rounded-md shadow-lg">

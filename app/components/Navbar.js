@@ -11,7 +11,7 @@ const Navbar = ({handleLogout,user}) => {
 
   return (
     <nav className='shadow-md w-full fixed top-0 left-0 z-[99]'>
-      <div className='md:flex items-center justify-between bg-white py-1 md:px-10 px-7'>
+      <div className='md:flex items-center justify-between bg-orange-200 py-1 md:px-10 px-7'>
       <div className='font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 
       text-gray-800'>
         <Link href="/">
@@ -22,7 +22,7 @@ const Navbar = ({handleLogout,user}) => {
             width={80}
             height={20}
           />
-          <span className="text-black text-xl font-bold">Cookoo</span>
+          <span className="text-black text-2xl font-extrabold">Cookoo</span>
         </div>
       </Link>
       </div>
@@ -31,7 +31,7 @@ const Navbar = ({handleLogout,user}) => {
        {open ? <GiCancel/>:<GiHamburgerMenu />}
       </div>
 
-      <div className={`md:flex md:items-center md:pb-0 gap-10 pb-12 absolute md:static bg-white md:z-auto z-[-1] right-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? 'top-10 p-12 lg:p-0':'top-[-490px]'}`}>
+      <div className={`md:flex md:items-center md:pb-0 gap-10 pb-12 absolute md:static bg-orange-200 md:z-auto z-[-1] right-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? 'top-10 p-12 lg:p-0':'top-[-490px]'}`}>
       <div className="flex flex-col md:gap-10 gap-2 md:flex-row md:items-center items-right md:pb-0">
         <Link href="/about">
           <span className="hover:underline cursor-pointer">About</span>
@@ -49,7 +49,7 @@ const Navbar = ({handleLogout,user}) => {
           </div>
         )}
         { !user && <Link href="/login">
-          <Button className="hover:underline hover:bg-gray-300 cursor-pointer text-black bg-slate-200">
+          <Button className="hover:underline hover:bg-gray-300 cursor-pointer bg-zinc-100 border border-white text-black">
             Log In
           </Button>
         </Link>}

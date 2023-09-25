@@ -26,6 +26,7 @@ export default function Home() {
   </div>
 
   <div className="w-full sm:w-[60%] lg:w-[70%] max-w-screen-md mx-auto sm:order-1 rounded-xl p-8 shadow-xl">
+    <h1 className="text-4xl text-center text-white font-cursive mb-10 font-mono font-extrabold underline underline-offset-8 ">Lets have a talk</h1>
     <form className="grid grid-cols-1 gap-y-6">
       <div className="flex flex-col gap-10">
         <div className="flex gap-6">

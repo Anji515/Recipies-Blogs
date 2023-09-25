@@ -1,35 +1,30 @@
 'use client'
 import { Button } from "@/components/ui/button";
-import { createClient } from "contentful";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { FaCheckSquare} from "react-icons/fa";
 import Loader from "../../components/Loader";
-
-const client = createClient({
-  space: process.env.NEXT_PUBLIC_SPACE_ID,
-  accessToken: "xFc7VZCJl0DmbH33twQ0PMlL-1MFQgcl6KP9ynIU-gs",
-});
+import Client from "@/app/Contentful";
 
 const Page = ({ params }) => {
   
   const [recipe, setRecipe] = useState({});
   const [loading, setLoading] = useState(false);
 
-
   useEffect(() => {
     const fetchRecipe = async () => {
       setLoading(true)
       try{
-        const item = await client.getEntries(
+        const item = await Client.getEntries(
           {
             content_type: "recipe",
             "fields.slug": params.slug,
           },
           {
-            next: { revalidate: 10 },
+            next: { revalidate: 10 } 
           }
         );
+
         console.log('item',item);
         setRecipe(item?.items[0].fields)
         setLoading(false);
@@ -46,8 +41,8 @@ const Page = ({ params }) => {
   console.log('recipe', recipe);
 
   return (
-    <>
-    { loading ? <Loader /> : (recipe && <div className="p-10 text-center bg-gradient-to-r from-blue-300 to-pink-300 py-20">
+    <div className="min-h-screen bg-gradient-to-r from-blue-300 to-pink-300 "> 
+    { loading ? <Loader /> : (recipe && <div className="w-full p-10 text-center py-20">
       <h1 className="text-4xl font-extrabold text-black mb-6 animate__animated animate__fadeIn animate__delay-1s">
         {title}
       </h1>
@@ -85,7 +80,7 @@ const Page = ({ params }) => {
       </div>
     </div>)
     }
-    </>
+    </div>
   );
 };
 
