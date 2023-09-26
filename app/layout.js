@@ -1,12 +1,13 @@
-import SupabaseProvider from './SupabaseProv'
 import Footer from './components/Footer'
 import Navbar from './components/Navbar'
-import './globals.css'
 import { Inter } from 'next/font/google'
-
+import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
-export default function RootLayout({ children }) {
+export const revalidate = 0
+
+export default async function RootLayout({ children }) {
+
 
   return (
     <html lang="en">
@@ -14,9 +15,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         <br/>
         <br/>
-        <SupabaseProvider>
         {children}
-        </SupabaseProvider>
         <Footer />
       </body>
     </html>

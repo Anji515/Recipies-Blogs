@@ -12,13 +12,17 @@ const RcoveryPage = () => {
    }
 
     return (
-    <div className='flex w-2/5 flex-col mx-auto items-left justify-between p-24 bg-gray-500 rounded-md m-20'>
+      <div className='h-[68vh] pt-10 mx-auto'>
+
+    <div className='flex w-2/5 flex-col mx-auto items-left justify-between p-24 bg-gray-200 rounded-md m-20 '>
         <h1>Recover your password</h1>
         <p>You will recieve an email to recover your password</p>
+        <br/>
         <Label>Recovery Email</Label>
         <Input value={recoveryEmail} placeholder='Enter mail for recovery' onChange={(e)=>setRecoveryEmail(e.target.value)}/>
         <br/>
         <Button onClick={handleRecovery}>Send</Button>
+    </div>
     </div>
   )
 }

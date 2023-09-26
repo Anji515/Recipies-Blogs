@@ -1,4 +1,4 @@
-"use client";
+'use client'
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Link from "next/link";
@@ -7,8 +7,7 @@ import CarouselCard from "./components/CaroselCard";
 import recipes from "./Data/data";
 
 export default function Home() {
-
-
+  
   return (
     <div className="row min-h-screen p-2 rounded-lg bg-gradient-to-r from-blue-300 to-pink-300">
       <HeroCard />
