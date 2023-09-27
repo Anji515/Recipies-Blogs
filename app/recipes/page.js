@@ -10,7 +10,7 @@ export default async function Recipes() {
      content_type: "recipe" 
    },
      {
-       next: { revalidate: 10 },
+       next: { revalidate: 2 },
      })
 
     //  console.log('recipes',recipes.items)

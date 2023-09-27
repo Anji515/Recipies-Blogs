@@ -1,12 +1,14 @@
 'use client'
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-import { supabase } from '../supabase';
+import { createClient, supabase } from '../supabase-browser';
 import Loader from '../components/Loader';
 import { Button } from '@/components/ui/button';
 
 const Profile = () => {
   const router = useRouter();
+
+  const supabase=createClient()
 
   const [profile, setProfile] = useState('')
   console.log('profile',profile)
@@ -36,10 +38,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen">
-      {!profile?<Loader/>:(
-        <>
-      <div className="bg-gray-100 min-h-screen">
+    <div className="min-h-screen bg-gradient-to-r from-blue-300 to-pink-300">
   {!profile ? <Loader /> : (
     <>
       <header className="bg-blue-500 p-4 text-white">
@@ -69,15 +68,12 @@ const Profile = () => {
 
         <div className="bg-white p-6 mt-4 rounded-lg shadow-lg">
           <h3 className="text-lg font-semibold">Additional Information</h3>
-              <p className="text-gray-500">{formattedDate}</p>
+              <p className="text-gray-500"><strong>Last Signin At : </strong>{formattedDate}</p>
         </div>
       </main>
     </>
   )}
-</div>
-        </>
-      )}
-    </div>
+ </div>
   );
 };
 

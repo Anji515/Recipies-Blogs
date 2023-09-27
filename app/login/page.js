@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { supabase } from "../supabase";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -8,13 +7,14 @@ import Link from "next/link";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
 import { FaEye, FaEyeSlash, FaGithub, FaGoogle } from "react-icons/fa";
-import { useRouter } from "next/navigation";
+import { useAuthentication } from "../Providers/AuthProvider";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const router = useRouter();
+
+  const {signInWithGithub,signInWithPassword,signInWithGoogle} = useAuthentication()
 
   const [toggleShowPassword, settoggleShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
@@ -23,52 +23,20 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    });
-    if (!error) {
-      alert("Login successful");
-      console.log("login data", data);
-      if (data?.user?.aud === "authenticated") {
-        router.push("/");
-      }
-    } else {
-      setError(error.message);
-      console.log("error: " + error.message);
+    try {
+      await signInWithPassword(email,password ); 
+    } catch (error) {
+      setError(error)
     }
-  };
-
-  const handleGithubLogin = async () => {
-    const { data } = await supabase.auth.signInWithOAuth({
-      provider: "github",
-      // options: {
-      //   redirectTo: `${location.origin}/auth/v1/callback`
-      // }
-    });
-    if (data?.user?.aud === "authenticated") {
-      // router.push('/')
-    }
-    console.log("github", data);
-  };
-
-  const handleGoogleLogin = async () => {
-    const { data } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-      // options: {
-      //   redirectTo: `${location.origin}/auth/v1/callback`
-      // }
-    });
-    console.log("google", data);
   };
 
   return (
-    <div className="w-full bg-gradient-to-r from-blue-300 to-pink-300 pt-20 pb-10 ">
-      <div className="flex w-2/5 flex-col mx-auto items-center justify-between p-24 rounded-md shadow-2xl border border-gray-300">
+    <div className="w-full md:w-full bg-gradient-to-r from-blue-300 to-pink-300 pt-20 pb-10 ">
+      <div className="flex w-[90%] md:w-2/5 p-10 md:p-24 flex-col mx-auto items-center justify-between rounded-md shadow-2xl border border-gray-300">
         <h1 className="text-3xl font-bold text-white">Login</h1>
         <form
           onSubmit={handleSubmit}
-          className="flex w-4/5 flex-col mx-auto justify-between px-14 py-4 rounded-md"
+          className="flex w-full md:w-4/5 flex-col mx-auto justify-between px-14 py-4 rounded-md"
         >
           <Label>Email</Label>
           <Input
@@ -115,18 +83,18 @@ const LoginForm = () => {
           If you don't account ? please do <Link href={"signup"} className="font-semibold text-blue-900">Signup</Link>
         </h1>
         <br />
-        <h1>OR LOG IN WITH</h1>
+        <h1 className="text-gray-700">OR LOG IN WITH</h1>
         <br />
         <div className="flex w-full mx-auto items-center justify-center p-2 gap-5">
           <Button
-            onClick={handleGithubLogin}
+            onClick={signInWithGithub}
             className="bg-white text-black hover:bg-gray-300"
           >
             <FaGithub className="font-extrabold text-gray-600 mr-2  text-[22px]" />
             Github
           </Button>
           <Button
-            onClick={handleGoogleLogin}
+            onClick={signInWithGoogle}
             className="bg-white text-black hover:bg-gray-300"
           >
             <FaGoogle className="font-extrabold text-red-600 mr-2  text-[22px]" />

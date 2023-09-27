@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { supabase } from "../supabase";
+import { supabase } from "../supabase-browser";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
@@ -29,7 +29,7 @@ const LoginForm = () => {
         options: {
           emailRedirectTo: `${location.origin}/auth/v1/callback`,
           data: {
-            user_metadata: { user_name: `${username}` },
+            user_name: `${username}` ,
           },
         },
       });
@@ -49,11 +49,11 @@ const LoginForm = () => {
 
   return (
     <div className="w-full bg-gradient-to-r from-blue-300 to-pink-300 pt-20 pb-10 ">
-      <div className="flex w-2/5 flex-col mx-auto items-center justify-between p-24 rounded-md m-20 shadow-2xl">
+      <div className="flex w-[90%] md:w-2/5 p-10 md:p-24 flex-col mx-auto items-center justify-between rounded-md m-20 shadow-2xl">
         <h1 className="text-3xl font-bold text-white">Sign Up</h1>
         <form
           onSubmit={handleSubmit}
-          className="flex w-4/5 flex-col mx-auto justify-between px-14 py-4 rounded-md"
+          className="flex w-full md:w-4/5 flex-col mx-auto justify-between px-14 py-4 rounded-md"
         >
           <Label>Email</Label>
           <Input

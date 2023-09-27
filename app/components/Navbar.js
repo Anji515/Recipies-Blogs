@@ -5,13 +5,20 @@ import { Button } from "@/components/ui/button";
 import { GiCancel, GiHamburgerMenu } from "react-icons/gi";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { supabase } from "../supabase";
+import { createClient } from "../supabase-browser";
+import { useAuthentication } from "../Providers/AuthProvider";
 
 const Navbar = () => {
   let [open, setOpen] = useState(false);
   const PATH = usePathname();
   const router = useRouter();
 
+  const {serverSession} = useAuthentication()
+
+  console.log('serverSession',serverSession);
+
+  const supabase=createClient()
+  
   const [username, setUsername] = useState("");
 
   useEffect(() => {
@@ -31,7 +38,7 @@ const Navbar = () => {
     const { error } = await supabase.auth.signOut();
     console.log("error", error);
     alert("Logout successful !");
-    // router.push('/')
+    router.push('/')
   };
 
   return (
@@ -120,7 +127,7 @@ const Navbar = () => {
                     className="text-xl font-semibold"
                     onClick={() => setOpen(!open)}
                   >
-                    {username?.email}
+                    {username?.user_metadata?.user_name}
                   </h2>
                 </Link>
                 <Button onClick={handleLogout}>Logout</Button>
