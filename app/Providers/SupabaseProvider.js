@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState } from "react";
-import { createClient } from "../supabase-browser";
+import { createClient } from "../utils/supabase-browser";
 
 
 const Context = createContext(undefined);

@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { supabase } from "../supabase-browser";
+import { supabase } from "../utils/supabase-browser";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";

@@ -2,10 +2,7 @@ import { NextResponse } from 'next/server'
  
 // This function can be marked `async` if using `await` inside
 export async function middleware(request) {
-  const cookies = request.cookies.get('sb-nrudbmtbaygkkolopcda-auth-token')
-
-  console.log('middleware',cookies)
-  
+  const cookies = request.cookies.get('sb-nrudbmtbaygkkolopcda-auth-token')  
   if(!cookies){
       return NextResponse.redirect(new URL('/login', request.url))
   }

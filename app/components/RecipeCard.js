@@ -5,6 +5,7 @@ import React from "react";
 const RecipeCard = ({ recipe }) => {
   const { title, slug, thumbnail, cookingTime } = recipe.fields;
 
+
   return (
     <div className="w-[100%] md:w-[90%] mx-auto my-8 rounded-lg overflow-hidden shadow-lg bg-gradient-to-r from-blue-300 to-pink-300 transform transition duration-300 hover:scale-105 border-2 border-grey-300">
       <div className="relative  rounded-t-lg overflow-hidden">

@@ -3,43 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { GiCancel, GiHamburgerMenu } from "react-icons/gi";
-import { usePathname, useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
-import { createClient } from "../supabase-browser";
+import React, { useState } from "react";
 import { useAuthentication } from "../Providers/AuthProvider";
+import { logEvent } from "firebase/analytics";
+import { analytics } from "../utils/firebaseAnalytics";
 
 const Navbar = () => {
   let [open, setOpen] = useState(false);
-  const PATH = usePathname();
-  const router = useRouter();
-
-  const {serverSession} = useAuthentication()
-
-  console.log('serverSession',serverSession);
-
-  const supabase=createClient()
-  
-  const [username, setUsername] = useState("");
-
-  useEffect(() => {
-   supabase.auth.onAuthStateChange((_, session) => {
-      if (PATH == "/profile") {
-        router.push("/profile");
-      }
-      if (session) {
-        setUsername(session.user);
-      } else {
-        setUsername(null);
-      }
-    });
-    }, []);
-
-  const handleLogout = async () => {
-    const { error } = await supabase.auth.signOut();
-    console.log("error", error);
-    alert("Logout successful !");
-    router.push('/')
-  };
+  const {serverSession,signOut} = useAuthentication()
 
   return (
     <nav className="shadow-md w-full fixed top-0 left-0 z-[99]">
@@ -85,7 +56,10 @@ const Navbar = () => {
             <Link href="/contact">
               <span
                 className="hover:underline cursor-pointer"
-                onClick={() => setOpen(!open)}
+                onClick={() => {
+                  setOpen(!open)
+                  logEvent(analytics,'Fired event: on Contacts')
+                }}
               >
                 Contact
               </span>
@@ -93,47 +67,51 @@ const Navbar = () => {
             <Link href="/recipes">
               <span
                 className="hover:underline cursor-pointer"
-                onClick={() => setOpen(!open)}
+                onClick={() => {
+                  setOpen(!open)
+                }}
               >
                 Recipes
               </span>
             </Link>
             {/* Providers login */}
-            {(username?.app_metadata?.provider == "github" || username?.app_metadata?.provider == "google") && (
+            {(serverSession?.user?.app_metadata?.provider == "github" || serverSession?.user?.app_metadata?.provider == "google") && (
               <div className="flex items-center header text-left container m-auto w-full gap-10">
                 <Link href="/profile">
                   <div
                     className="flex justify-between items-center gap-2"
                     onClick={() => setOpen(!open)}
                   >
-                    <img
-                      src={username?.user_metadata?.avatar_url} // Replace with the URL of the user's avatar image
+                    <Image
+                      src={serverSession?.user?.user_metadata?.avatar_url} // Replace with the URL of the user's avatar image
                       alt="User Avatar"
+                      width={150}
+                      height={150}
                       className="w-16 h-16 rounded-full"
                     />
                     <h2 className="text-xl font-semibold">
-                      {username?.user_metadata?.user_name}
+                      {serverSession?.user?.user_metadata?.user_name}
                     </h2>
                   </div>
                 </Link>
-                <Button onClick={handleLogout}>Logout</Button>
+                <Button onClick={signOut}>Logout</Button>
               </div>
             )}
             {/*Email login */}
-            {username?.app_metadata?.provider == "email" && (
+            {serverSession?.user?.app_metadata?.provider == "email" && (
               <div className="flex justify-between items-center gap-2 ">
                 <Link href="/profile">
                   <h2
                     className="text-xl font-semibold"
                     onClick={() => setOpen(!open)}
                   >
-                    {username?.user_metadata?.user_name}
+                    {serverSession?.user?.user_metadata?.user_name}
                   </h2>
                 </Link>
-                <Button onClick={handleLogout}>Logout</Button>
+                <Button onClick={signOut}>Logout</Button>
               </div>
             )}
-            {!username?.email && (
+            {!serverSession?.user?.email && (
               <Link href="/login">
                 <Button
                   onClick={() => setOpen(!open)}
@@ -143,7 +121,7 @@ const Navbar = () => {
                 </Button>
               </Link>
             )}
-            {!username?.email && (
+            {!serverSession?.user?.email && (
               <Link href="/signup">
                 <Button
                   onClick={() => setOpen(!open)}

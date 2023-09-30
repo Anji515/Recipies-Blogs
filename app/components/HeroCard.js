@@ -1,9 +1,10 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
 const HeroCard = () => {
   return (
-    <div className="bg-gradient-to-r from-blue-500 to-red-400 text-white p-10 rounded-lg shadow-lg mx-auto mb-5">
+    <div className="bg-gradient-to-r from-blue-500 to-red-400 text-white p-10 rounded-lg shadow-lg mx-auto mb-5 mt-10">
       <div className="max-w-7xl mx-auto">
         <div className="w-full flex flex-col m-auto md:flex-row items-center content-center justify-center space-y-4 md:space-y-0">
           <div className="w-full md:w-1/2">
@@ -21,9 +22,11 @@ const HeroCard = () => {
             </button>
           </div>
           <div className="flex w-full md:w-2/5 mx-auto justify-center items-center ">
-            <img
+            <Image
               src="https://demo.wpthemego.com/themes/sw_appetit/wp-content/uploads/2018/04/7.png"
               alt="Hero Image"
+              width={450}
+              height={450}
               className="animate-spin-slow"
             />
           </div>

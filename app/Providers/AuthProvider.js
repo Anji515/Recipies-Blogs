@@ -14,7 +14,6 @@ export default function SupabaseAuthProvider({
   const { supabase } = useSupabase();
   const router = useRouter();
 
-  console.log('authProv45Session',serverSession)
   // Get USER
   const getUser = async () => {
     const { data: user, error } = await supabase
@@ -40,7 +39,9 @@ export default function SupabaseAuthProvider({
   // Sign Out
   const signOut = async () => {
     await supabase.auth.signOut();
+    router.refresh();
     router.push("/login");
+    alert('Sign Out Successfully !');
   };
 
   // Sign-In with Github
