@@ -14,18 +14,20 @@ const Page = async ({ params }) => {
         "fields.slug": params.slug,
       },
       {
-        next: { revalidate: 10 },
+        next: { revalidate: 0 },
       }
     );
 
     //  console.log('item',item?.items[0].fields);
-  } catch (err) {}
-
-  const { featuredImage, cookingTime, title, ingredients, methode } =
-    item.items[0].fields;
+  } catch (err) {
+    console.log('error', err.message);
+  }
+  
+  const { featuredImage, cookingTime, title, ingredients, methode, rating } = item?.items[0]?.fields;
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-300 to-pink-300 ">
+      {!item.items[0].fields && <Loader/>}
       <Suspense fallback={<Loader />} >
         {item?.items[0].fields && (
           <div className="w-full p-10 text-center py-20">
@@ -33,7 +35,7 @@ const Page = async ({ params }) => {
               {title}
             </h1>
             <div className="w-full max-w-2xl mx-auto">
-              <div className="relative overflow-hidden rounded-lg h-96 mb-6">
+              <div className="relative overflow-hidden rounded-lg h-[600px] w-[100%] mb-6">
                 {featuredImage?.fields && (
                   <Image
                     src={`https:${featuredImage?.fields?.file?.url}`}
@@ -43,6 +45,7 @@ const Page = async ({ params }) => {
                   />
                 )}
               </div>
+              <h1 className="text-violet-900 font-extrabold text-[20px]">{new Array(rating).fill(0).map((_, i) => "\u2605")} ({rating})</h1>
             </div>
             <p className="mt-4 text-gray-600 text-lg">
               Takes about <strong>{cookingTime}</strong> minutes to cook

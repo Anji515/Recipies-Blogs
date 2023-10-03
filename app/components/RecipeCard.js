@@ -3,11 +3,12 @@ import Link from "next/link";
 import React from "react";
 
 const RecipeCard = ({ recipe }) => {
-  const { title, slug, thumbnail, cookingTime } = recipe.fields;
-
+  const { title, slug, thumbnail, cookingTime, rating } = recipe.fields;
 
   return (
     <div className="w-[100%] md:w-[90%] mx-auto my-8 rounded-lg overflow-hidden shadow-lg bg-gradient-to-r from-blue-300 to-pink-300 transform transition duration-300 hover:scale-105 border-2 border-grey-300">
+      <Link href={`/recipes/${slug}`}>
+
       <div className="relative  rounded-t-lg overflow-hidden">
         <Image
           src={`https:${thumbnail.fields.file.url}`}
@@ -28,11 +29,15 @@ const RecipeCard = ({ recipe }) => {
           <Link
             href={`/recipes/${slug}`}
             className="underline hover:text-blue-900 text-lg"
-          >
+            >
             Cook This
           </Link>
         </p>
+        <h1 className="text-violet-900 font-extrabold text-[18px]">
+          {new Array(rating).fill(0).map((_, i) => "\u2605")} ({rating})
+        </h1>
       </div>
+    </Link>
     </div>
   );
 };

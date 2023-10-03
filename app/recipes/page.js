@@ -11,6 +11,7 @@ export default async function Recipes() {
    },
      {
        next: { revalidate: 2 },
+       fallback: true
      })
 
     //  console.log('recipes',recipes.items)
