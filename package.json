@@ -38,7 +38,6 @@
     "clsx": "^2.0.0",
     "contentful": "^10.5.2",
     "dotenv": "^16.3.1",
-    "eslint": "8.49.0",
     "eslint-config-next": "13.4.19",
     "firebase": "^10.4.0",
     "init": "^0.1.2",
@@ -56,5 +55,9 @@
     "tailwindcss": "3.3.3",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.22.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.50.0",
+    "eslint-plugin-next": "^0.0.0"
   }
 }
