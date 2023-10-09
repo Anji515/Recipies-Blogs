@@ -1,11 +1,12 @@
 "use client";
 import { useState } from "react";
-import { supabase } from "../utils/supabase-browser";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { Label } from "@/components/ui/label";
 import { FaExclamationCircle, FaEye, FaEyeSlash } from "react-icons/fa";
+import { createClient } from "../utils/supabase-browser";
+
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -15,6 +16,8 @@ const LoginForm = () => {
   const [succes, setSuccess] = useState("");
   const [username, setUsername] = useState("");
 
+  let [supabase] = useState(() => createClient());
+
   const [toggleShowPassword, settoggleShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     settoggleShowPassword(!toggleShowPassword);
@@ -22,6 +25,15 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+   const { data: { existingUser } } = await supabase.auth.getUser()
+   console.log('user',existingUser)
+
+    if (!email || !username || !password || !confirmPassword) {
+      setError("Please fill in all fields.");
+      return;
+    }
+    
     if (password == confirmPassword) {
       const { data, error } = await supabase.auth.signUp({
         email,
@@ -58,6 +70,7 @@ const LoginForm = () => {
           <Label>Email</Label>
           <Input
             type="email"
+            required
             placeholder="Enter your email address"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -103,13 +116,13 @@ const LoginForm = () => {
           <Button type="submit">Signup</Button>
           <br />
           {error && (
-            <p className="text-red-900 font-bold">
+            <p className="text-red-900 font-bold flex gap-2 items-center justify-center">
               <FaExclamationCircle />
               {error}
             </p>
           )}
           {succes && (
-            <p className="text-green-900 font-bold">
+            <p className="text-green-900 font-bold flex gap-2 items-center justify-center">
               <FaExclamationCircle />
               {succes}
             </p>

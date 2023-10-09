@@ -1,22 +1,13 @@
 import RecipeCard from "../components/RecipeCard";
 import Loader from "../components/Loader";
-import Client from "../Contentful";
 import { Suspense } from "react";
+import { fetchRecipes } from "../server/getRecipes";
 
 export default async function Recipes() {
 
-  const recipes = await Client.getEntries(
-    { 
-     content_type: "recipe" 
-   },
-     {
-       next: { revalidate: 2 },
-       fallback: true
-     })
+  const recipes = await fetchRecipes()
 
-    //  console.log('recipes',recipes.items)
-
-  return (
+     return (
     <div>
     <Suspense fallback={<Loader />}>
     <div className="bg-gradient-to-r from-blue-300 to-pink-300 p-20 min-h-screen">
@@ -26,10 +17,10 @@ export default async function Recipes() {
       </h1>
        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-1 md:gap-20">
          {recipes?.items?.map((recipe) => (
-             <RecipeCard key={recipe.sys.id} recipe={recipe} /> 
+           <RecipeCard key={recipe.sys.id} recipe={recipe} /> 
              ))}
         </div>
-    </div>
+      </div>
       </Suspense>
     </div>
   );

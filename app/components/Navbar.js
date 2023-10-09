@@ -26,6 +26,9 @@ const Navbar = () => {
                 alt="Logo"
                 width={80}
                 height={20}
+                onClick={()=>{
+                  logEvent(analytics,'Fired event: on HomePageClick')
+                }}
               />
               <span className="text-black text-2xl font-extrabold">Cookoo</span>
             </div>
@@ -48,7 +51,10 @@ const Navbar = () => {
             <Link href="/about">
               <span
                 className="hover:underline cursor-pointer"
-                onClick={() => setOpen(!open)}
+                onClick={() => {  
+                  setOpen(!open)
+                  logEvent(analytics,'Fired event: on About')
+                }}
               >
                 About
               </span>
@@ -69,6 +75,7 @@ const Navbar = () => {
                 className="hover:underline cursor-pointer"
                 onClick={() => {
                   setOpen(!open)
+                  logEvent(analytics,'Fired event: on Recipes')
                 }}
               >
                 Recipes
@@ -114,7 +121,10 @@ const Navbar = () => {
             {!serverSession?.user?.email && (
               <Link href="/login">
                 <Button
-                  onClick={() => setOpen(!open)}
+                  onClick={() => {
+                    setOpen(!open)
+                    logEvent(analytics,'Fired event: on Login')
+                  }}
                   className="hover:underline hover:bg-gray-300 cursor-pointer bg-zinc-100 border border-white text-black"
                 >
                   Log In
@@ -124,7 +134,10 @@ const Navbar = () => {
             {!serverSession?.user?.email && (
               <Link href="/signup">
                 <Button
-                  onClick={() => setOpen(!open)}
+                  onClick={() => {
+                    setOpen(!open)
+                    logEvent(analytics,'Fired event: on Signup')
+                  }}
                   className="hover:underline cursor-pointer"
                 >
                   Sign Up

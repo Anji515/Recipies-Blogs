@@ -41,6 +41,7 @@ const LoginForm = () => {
           <Label>Email</Label>
           <Input
             type="email"
+            required
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}

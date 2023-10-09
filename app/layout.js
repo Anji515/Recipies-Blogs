@@ -11,6 +11,7 @@ export const metadata = {
   title: "Cookoo Recipes",
   description: "Discover and savor mouthwatering recipes in our app",
 };
+export const revalidate=0;
 
 export default async function RootLayout({ children }) {
   const supabase = createClient();
