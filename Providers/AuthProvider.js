@@ -1,12 +1,12 @@
 "use client";
 
+import { createClient } from "@/app/utils/supabase-browser";
 import { createContext, useContext, useState } from "react";
-import { createClient } from "../utils/supabase-browser";
 
 
 const Context = createContext(undefined);
 
-export default function SupabaseProvider({ children }) {
+export default function AuthProvider({ children }) {
 
   const [supabase] = useState(() => createClient());
 
@@ -20,7 +20,7 @@ export default function SupabaseProvider({ children }) {
 export const useSupabase = () => {
   let context = useContext(Context);
   if (context === undefined) {
-    throw new Error("useSupabase must be used inside SupabaseProvider");
+    throw new Error("useSupabase must be used inside AuthProvider");
   } else {
     return context;
   }

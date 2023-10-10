@@ -1,13 +1,12 @@
 "use client";
-
 import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect } from "react";
 import useSWR from "swr";
-import { useSupabase } from "./SupabaseProvider";
+import { useSupabase } from "./AuthProvider";
 
 const Context = createContext();
 
-export default function SupabaseAuthProvider({
+export default function AuthContext({
   serverSession,
   children,
 } ) {
@@ -104,7 +103,7 @@ export default function SupabaseAuthProvider({
 export const useAuthentication = () => {
   let context = useContext(Context);
   if (context === undefined) {
-    throw new Error("useAuth must be used inside SupabaseAuthProvider");
+    throw new Error("useAuth must be used inside AuthContext");
   } else {
     return context;
   }

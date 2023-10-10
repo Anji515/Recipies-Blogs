@@ -1,14 +1,26 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { FaCheckSquare } from "react-icons/fa";
-import Loader from "../../components/Loader";
+import Loader from "../../../components/Loader";
 import { Suspense } from "react";
 import Link from "next/link";
 import { fetchRecipes } from "@/app/server/getRecipes";
+import { redirect } from "next/navigation";
 
 const Page = async ({ params }) => {
+  let item = await fetchRecipes(params);
 
-  let item = await fetchRecipes(params)
+  if (!item?.items[0]?.fields) {
+    redirect("/recipes");
+  }
+
+  if (!item?.items[0]?.fields) {
+    return (
+      <div className="min-h-screen bg-gradient-to-r from-blue-300 to-pink-300 ">
+        <Loader />
+      </div>
+    );
+  }
 
   const {
     featuredImage,
@@ -30,14 +42,14 @@ const Page = async ({ params }) => {
               {title}
             </h1>
             <div className="w-full max-w-2xl mx-auto">
-              <div className="relative overflow-hidden rounded-lg h-[600px] w-[100%] mb-6">
+              <div className="relative overflow-hidden rounded-lg h-full w-full mb-6">
                 {featuredImage?.fields && (
                   <Image
                     src={`https:${featuredImage?.fields?.file?.url}`}
                     width={featuredImage?.fields?.file?.details?.image?.width}
                     height={featuredImage?.fields?.file?.details?.image?.height}
                     alt={title}
-                    className="object-cover w-full h-full transform scale-105 transition-transform duration-500 hover:scale-100 animate__animated animate__fadeIn animate__delay-3s"
+                    className="object-cover transform scale-105 transition-transform duration-500 hover:scale-100 animate__animated animate__fadeIn animate__delay-3s"
                   />
                 )}
               </div>
@@ -48,7 +60,9 @@ const Page = async ({ params }) => {
             <p className="mt-4 text-gray-600 text-lg">
               Takes about <strong>{cookingTime}</strong> minutes to cook
             </p>
-            <h1 className="text-blue-900 font-semibold text-[18px]"><Link href={'/recipes'}>Back To Recipes</Link></h1>
+            <h1 className="text-blue-900 font-semibold text-[18px]">
+              <Link href={"/recipes"}>Back To Recipes</Link>
+            </h1>
             <div className="w-2/5 mt-8 text-left mx-auto text-gray-700 px-10 py-2">
               <button className="bg-red-600 text-white py-2 px-6 rounded-full hover:bg-red-700 transition duration-300 ease-in-out mb-6 animate__animated animate__fadeIn animate__delay-2s">
                 Ingredients
@@ -67,10 +81,15 @@ const Page = async ({ params }) => {
             </div>
 
             <div className="w-2/5 mt-8 text-left mx-auto text-gray-700 px-10 py-2">
-              <Button className="bg-red-600 text-black hover:bg-red-700 transition duration-300 ease-in-out mb-6 rounded-full">Categories</Button>
+              <Button className="bg-red-600 text-black hover:bg-red-700 transition duration-300 ease-in-out mb-6 rounded-full">
+                Categories
+              </Button>
               <div className="list-inside list-disc mt-2 ml-4">
                 {categories.map((categorie) => (
-                  <Button key={categorie} className="bg-gray-400 text-black mb-2 mr-2 hover:bg-gray-500 rounded-3xl">
+                  <Button
+                    key={categorie}
+                    className="bg-gray-400 text-black mb-2 mr-2 hover:bg-gray-500 rounded-3xl"
+                  >
                     #{categorie}
                   </Button>
                 ))}

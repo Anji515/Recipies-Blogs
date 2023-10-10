@@ -6,11 +6,17 @@ export async function fetchRecipes(params) {
       const item = await Client.getEntries({
         content_type: "recipe",
         "fields.slug": params.slug,
+      },{
+        next: {revalidate:1},
+        fallback:true
       });
       return item;
     } else {
       const recipes = await Client.getEntries({
         content_type: "recipe",
+      },{
+        next: {revalidate:1},
+        fallback:true
       });
       return recipes;
     }
@@ -18,23 +24,4 @@ export async function fetchRecipes(params) {
     console.log("error", err.message);
     return null;
   }
-}
-
-
-export async function getSingleRecipe(params){
-    let item;
-      try {
-        item = await Client.getEntries(
-          {
-            content_type: "recipe",
-            "fields.slug": params.slug,
-          },
-          {
-            next: { revalidate: 0 },
-          }
-        );
-      } catch (err) {
-        console.log("error", err.message);
-      }
-   return item
 }

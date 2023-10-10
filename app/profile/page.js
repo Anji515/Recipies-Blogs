@@ -1,5 +1,5 @@
 'use client'
-import Loader from '../components/Loader';
+import Loader from '../../components/Loader';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import { useAuthentication } from '../Providers/AuthProvider';

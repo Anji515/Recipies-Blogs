@@ -1,10 +1,11 @@
-import Footer from "./components/Footer";
-import Navbar from "./components/Navbar";
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import SupabaseProvider from "./Providers/SupabaseProvider";
-import SupabaseAuthProvider from "./Providers/AuthProvider";
+
 import { createClient } from "./utils/supabase-server";
+import AuthProvider from "@/Providers/AuthProvider";
+import AuthContext from "@/Providers/AuthContext";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -23,15 +24,15 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <SupabaseProvider>
-          <SupabaseAuthProvider serverSession={session}>
+        <AuthProvider>
+          <AuthContext serverSession={session}>
             <Navbar />
             <br />
             <br />
             {children}
             <Footer />
-          </SupabaseAuthProvider>
-        </SupabaseProvider>
+          </AuthContext>
+        </AuthProvider>
       </body>
     </html>
   );

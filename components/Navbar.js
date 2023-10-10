@@ -4,9 +4,10 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { GiCancel, GiHamburgerMenu } from "react-icons/gi";
 import React, { useState } from "react";
-import { useAuthentication } from "../Providers/AuthProvider";
 import { logEvent } from "firebase/analytics";
-import { analytics } from "../utils/firebaseAnalytics";
+import { analytics } from "../app/utils/firebaseAnalytics";
+import { useAuthentication } from "@/Providers/AuthContext";
+
 
 const Navbar = () => {
   let [open, setOpen] = useState(false);

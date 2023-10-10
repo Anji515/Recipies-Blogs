@@ -1,3 +1,4 @@
+"use client";
 import Image from 'next/image';
 import { FaArrowCircleLeft, FaArrowCircleRight } from 'react-icons/fa';
 import { Carousel } from 'react-responsive-carousel';

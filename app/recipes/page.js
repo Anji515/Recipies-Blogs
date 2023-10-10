@@ -1,5 +1,5 @@
-import RecipeCard from "../components/RecipeCard";
-import Loader from "../components/Loader";
+import RecipeCard from "../../components/RecipeCard";
+import Loader from "../../components/Loader";
 import { Suspense } from "react";
 import { fetchRecipes } from "../server/getRecipes";
 

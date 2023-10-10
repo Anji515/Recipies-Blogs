@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { SECTION } from "../constants/Data";
+import { SECTION } from "../../constants/Data";
 
 export default function About() {
   return (
