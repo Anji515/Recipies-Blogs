@@ -3,17 +3,18 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { useForm, ValidationError } from "@formspree/react";
+import ContactImage from '../../assets/Contact.webp'
 
 export default function Contact() {
-  const [state, handleSubmit] = useForm("xaygldel");
+  const [state, handleSubmit] = useForm(process.env.NEXT_PUBLIC_FORMS_PREE_USER_ID);
 
   return (
     <div className="bg-gradient-to-r from-blue-300 to-pink-300 py-5">
       <Image
-        src="https://images.unsplash.com/photo-1466096115517-bceecbfb6fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+        src={ContactImage}
         alt="Contact"
-        width={"1000"}
-        height={"400"}
+        width={1000}
+        height={400}
         className="w-full md:w-full md:h-[600px] h-[200px] my-2 rounded-md"
       />
 

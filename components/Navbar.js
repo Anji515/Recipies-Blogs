@@ -5,9 +5,9 @@ import { Button } from "@/components/ui/button";
 import { GiCancel, GiHamburgerMenu } from "react-icons/gi";
 import React, { useState } from "react";
 import { logEvent } from "firebase/analytics";
-import { analytics } from "../app/utils/firebaseAnalytics";
-import { useAuthentication } from "@/Providers/AuthContext";
-
+import { analytics } from "../utils/firebaseAnalytics";
+import { useAuthentication } from "@app/Providers/AuthContext";
+import Logo from '../assets/Logo.png'
 
 const Navbar = () => {
   let [open, setOpen] = useState(false);
@@ -23,7 +23,7 @@ const Navbar = () => {
           <Link href="/">
             <div className="flex items-center space-x-2 cursor-pointer">
               <Image
-                src="https://i.ibb.co/SXMDvvv/4c8022c6e30e46139eb905d74c5605b5-removebg-preview.png"
+                src={Logo}
                 alt="Logo"
                 width={80}
                 height={20}

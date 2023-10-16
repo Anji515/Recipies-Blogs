@@ -3,9 +3,10 @@ import Navbar from "../components/Navbar";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
-import { createClient } from "./utils/supabase-server";
-import AuthProvider from "@/Providers/AuthProvider";
-import AuthContext from "@/Providers/AuthContext";
+import { createClient } from "../utils/supabase-server";
+import AuthProvider from "./Providers/AuthProvider";
+import AuthContext from "./Providers/AuthContext";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {

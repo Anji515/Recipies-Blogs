@@ -1,6 +1,6 @@
 "use client";
 
-import { createClient } from "@/app/utils/supabase-browser";
+import { createClient } from "@utils/supabase-browser";
 import { createContext, useContext, useState } from "react";
 
 

@@ -1,7 +1,7 @@
 import RecipeCard from "../../components/RecipeCard";
 import Loader from "../../components/Loader";
 import { Suspense } from "react";
-import { fetchRecipes } from "../server/getRecipes";
+import { fetchRecipes } from "../../server/getRecipes";
 
 export default async function Recipes() {
 

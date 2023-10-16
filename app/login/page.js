@@ -7,7 +7,8 @@ import Link from "next/link";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
 import { FaEye, FaEyeSlash, FaGithub, FaGoogle } from "react-icons/fa";
-import { useAuthentication } from "../Providers/AuthProvider";
+import { useAuthentication } from "@app/Providers/AuthContext";
+
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");

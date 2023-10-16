@@ -1,12 +1,12 @@
 'use client'
 import Loader from '../../components/Loader';
 import { Button } from '@/components/ui/button';
+import { useAuthentication } from '@app/Providers/AuthContext';
 import Image from 'next/image';
-import { useAuthentication } from '../Providers/AuthProvider';
 
 const Profile = () => {
-  const {serverSession,signOut} = useAuthentication()
-
+  const {serverSession,signOut} = useAuthentication()                                                                                                                               
+                                                                                                                                                              
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-300 to-pink-300">
   {!serverSession?.user ? <Loader /> : (

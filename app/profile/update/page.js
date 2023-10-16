@@ -1,5 +1,5 @@
 "use client";
-import { createClient } from "@/app/utils/supabase-browser";
+import { createClient } from "@utils/supabase-browser";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import React, { useState } from "react";

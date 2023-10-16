@@ -1,15 +1,26 @@
 import Link from "next/link";
 import HeroCard from "../components/HeroCard";
 import TopCarousel from "../components/TopCarousel";
-import { HOMEPAGE_RECIPE_FEATURED, RCEIPES_CAROUSEL } from "../constants/Data";
-import Image from "next/image";
 import CarouselCard from "../components/CaroselCard";
+import { fetchHomePageCards, fetchHomePageData } from "../server/getRecipes";
+import FeaturedCards from "@components/FeaturedCards";
 
 export default async function Home() {
+
+   const carousel = await fetchHomePageData()
+  //  console.log(carousel.items[0].fields.carouselImages,'carousel')
+   const {carouselImages}=carousel.items[0].fields
+
+   const CarouselCards =await fetchHomePageCards()
+
+   const FeaturedGridImages=CarouselCards.items.slice(-6)
+   const GroupCarousel=CarouselCards.items.slice(0,8)
+
+
   return (
     <div className="row min-h-screen p-2 rounded-lg bg-gradient-to-r from-blue-300 to-pink-300">
       <HeroCard />
-      <TopCarousel />
+      <TopCarousel carouselImages={carouselImages}/>
 
       {
         // recipes.items.map((item)=>(
@@ -36,25 +47,8 @@ export default async function Home() {
         </div>
 
         {/* Featured Food Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* Cards */}
-          {HOMEPAGE_RECIPE_FEATURED?.map((items) => (
-            <div
-              key={items.id}
-              className="bg-white rounded-lg shadow-md p-4 bg-gradient-to-r from-red-200 to-gray-300"
-            >
-              <Image
-                width={400}
-                height={400}
-                src={items.image_url}
-                alt="Food Image 1"
-                className="w-full h-48 object-cover rounded-md"
-              />
-              <h2 className="text-xl font-semibold mt-2">{items.title}</h2>
-              <p className="text-gray-600">{items.description}</p>
-            </div>
-          ))}
-        </div>
+        <FeaturedCards FeaturedGridImages={FeaturedGridImages}/>
+
       </div>
 
       <div className="container mx-auto mt-8">
@@ -74,7 +68,7 @@ export default async function Home() {
         </div>
       </div>
 
-      <CarouselCard recipes={RCEIPES_CAROUSEL} />
+      <CarouselCard GroupCarousel={GroupCarousel} />
     </div>
   );
 }

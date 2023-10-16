@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { Label } from "@/components/ui/label";
 import { FaExclamationCircle, FaEye, FaEyeSlash } from "react-icons/fa";
-import { createClient } from "../utils/supabase-browser";
+import { createClient } from "../../utils/supabase-browser";
 
 
 const LoginForm = () => {

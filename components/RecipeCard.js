@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { analytics,logEvent } from "../app/utils/firebaseAnalytics";
+import { analytics,logEvent } from "../utils/firebaseAnalytics";
 
 const RecipeCard = ({ recipe }) => {
   const { title, slug, thumbnail, cookingTime, rating } = recipe.fields;
@@ -18,7 +18,6 @@ const RecipeCard = ({ recipe }) => {
             alt="Thumbnail"
             width={thumbnail.fields.file.details.image.width}
             height={thumbnail.fields.file.details.image.height}
-            // className="h-[250px]"
           />
           <div className="absolute bottom-0 left-0 p-2 bg-yellow-500 text-black font-semibold">
             <p>

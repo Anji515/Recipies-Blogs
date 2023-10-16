@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import Logo from '../assets/Logo.png'
 
 const Footer = () => {
   return (
@@ -8,7 +9,7 @@ const Footer = () => {
         <div className="grid grid-cols-2 md:grid-cols-2 justify-evenly lg:grid-cols-4 gap-10">
         <div >
               <Image
-                src="https://i.ibb.co/SXMDvvv/4c8022c6e30e46139eb905d74c5605b5-removebg-preview.png"
+                src={Logo}
                 alt="Logo"
                 width={100}
                 className='bg-white rounded-full'
