@@ -6,8 +6,7 @@ import { Button } from "@components/ui/button";
 import Link from "next/link";
 
 export default async function Recipes() {
-
-  const recipes = await fetchRecipes();
+  const recipes = await fetchRecipes({limit: 8})
 
      return (
     <div>
@@ -17,7 +16,10 @@ export default async function Recipes() {
         <span className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-700 transform skew-x-12 transition-transform duration-500 group-hover:scale-110"></span>
         <span className="relative z-10 text-white text-shadow-lg">Recipes</span>
       </h1>
-         <Button className='ml-10'><Link href={'/recent-recipes'}>View Recent Recipes</Link></Button>
+      <div className="w-[50%] flex gap-10 items-center ml-10" >
+      <h1>Here is the Recent 8 Recipes</h1>
+      <Button><Link href={'/recipes'}>Go to All Recipes</Link></Button>
+      </div>
        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-1 md:gap-20">
          {recipes?.items?.map((recipe) => (
            <RecipeCard key={recipe.sys.id} recipe={recipe} /> 
@@ -28,4 +30,3 @@ export default async function Recipes() {
     </div>
   );
 }
-

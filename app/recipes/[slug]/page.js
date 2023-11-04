@@ -4,8 +4,8 @@ import { FaCheckSquare } from "react-icons/fa";
 import Loader from "../../../components/Loader";
 import { Suspense } from "react";
 import Link from "next/link";
-import { fetchRecipes } from "@server/getRecipes";
 import { redirect } from "next/navigation";
+import { fetchRecipes } from "@server/getRecipes";
 
 const Page = async ({ params }) => {
   let item = await fetchRecipes(params);

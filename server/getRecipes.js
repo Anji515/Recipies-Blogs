@@ -1,6 +1,8 @@
 import Client from "../utils/Contentful";
 
 export async function fetchRecipes(params) {
+  const limit = params?.limit || undefined;
+
   try {
     if (params?.slug) {
       const item = await Client.getEntries({
@@ -14,6 +16,7 @@ export async function fetchRecipes(params) {
     } else {
       const recipes = await Client.getEntries({
         content_type: "recipe",
+        limit: limit
       },{
         next: {revalidate:1},
         fallback:true

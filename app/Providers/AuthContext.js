@@ -64,6 +64,7 @@ export default function AuthContext({
       return error.message;
     }
     if (!error){
+      router.push('/')
       alert("Login successful");
     }
 
