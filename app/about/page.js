@@ -60,7 +60,7 @@ export default function About() {
           </p>
           <button>
             <a
-              href="mailto:vodakix670@hapincy.com"
+              href="mailto:anji.2k21@gmail.com"
               className="mt-4 inline-block bg-orange-500 text-black px-6 py-3 rounded-[25px] hover:bg-blue-100 transition duration-300"
             >
               Leave us a message
