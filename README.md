@@ -1,20 +1,41 @@
 #### Coockoo - Recipes Blog
 
-#### Deployed Link - [Coocko Recipe Blog](https://recipies-blogs.vercel.app/)
+#### Deployed Link - ![Coocko Recipe Blog](https://recipies-blogs.vercel.app/)
 
 ## Getting Started
 
 First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Clone the repository
+
+npm install
+
+npm run dev
+
+```
+
+Open ![http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+### Technologies Used
+
+#### - Next.Js
+#### - Tailwind CSS
+#### - Supabase Authentication
+#### - Contentful CMS
+#### - Firebase Analytics
+
+
+### Here is all about the Application
+-Landing page having hero card and carousel data getting from CMS.
+-Signup page where you can signup with email magic link.
+-Login page where you can login with email and password, Google and github.
+-Recipes page fetching data from CMS.
+-Single Recipe page having full details of item getting from CMS.
+-About page having details of Recipe.
+-Contact page Where you can contact us by filling the Form.
+
 
 ### Landing Page
 
