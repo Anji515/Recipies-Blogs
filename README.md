@@ -18,18 +18,42 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ### Landing Page
 
-<div class="flex">
-  <div class="w-1/3 p-4">
-    <img src="./assets/Landing%20Page.png" alt="Landing Page 1" class="w-full">
-  </div>
-  <div class="w-1/3 p-4">
-    <img src="./assets/Carousel%20and%20Category.png" alt="Landing Page 2" class="w-full">
-  </div>
-  <div class="w-1/3 p-4">
-    <img src="./assets/Lower%20Carousel.png" alt="Landing Page 3" class="w-full">
-  </div>
-</div>
+[The landing page1](./assets/Landing%20Page.png)
+[The landing page2](./assets/Carousel%20and%20Category.png)
+[The landing page3](./assets/Lower%20Carousel.png)
 
+### Login Page
+
+[The Login page](./assets/Login%20Page.png)
+
+### Signup Page
+
+[The Signup page](./assets/Signup%20Page.png)
+
+### Profile Page
+
+[The Signup page](./assets/Profile%20Page.png)
+
+### Recipe Page
+
+[The Recipe page1](./assets/Recipes%20Page.png)
+[The Recipe page2](./assets/Recipes%20Page%20Recent.png)
+
+### Recipe Slug Page
+
+[The Recipe Slug page1](./assets/Recipe%20Slug%201.png)
+[The Recipe Slug page2](./assets/Recipe%20Slug%202.png)
+[The Recipe Slug page3](./assets/Recipe%20Slug%203.png)
+
+### About Page
+
+[The About page1](./assets/About%20Page%201.png)
+[The About page2](./assets/About%20Page%202.png)
+[The About page1](./assets/About%20Page%203.png)
+
+### Contact Page
+
+[The Contact page](./assets/ContactPage.png)
 
 
 ## Learn More
