@@ -19,16 +19,17 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ### Landing Page
 
 <div class="flex">
-  <div class="flex-1 m-2">
+  <div class="w-1/3 p-4">
     <img src="./assets/Landing%20Page.png" alt="Landing Page 1" class="w-full">
   </div>
-  <div class="flex-1 m-2">
+  <div class="w-1/3 p-4">
     <img src="./assets/Carousel%20and%20Category.png" alt="Landing Page 2" class="w-full">
   </div>
-  <div class="flex-1 m-2">
+  <div class="w-1/3 p-4">
     <img src="./assets/Lower%20Carousel.png" alt="Landing Page 3" class="w-full">
   </div>
 </div>
+
 
 
 ## Learn More
