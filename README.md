@@ -20,21 +20,21 @@ Open ![http://localhost:3000](http://localhost:3000) with your browser to see th
 
 ### Technologies Used
 
-#### - Next.Js
-#### - Tailwind CSS
-#### - Supabase Authentication
-#### - Contentful CMS
-#### - Firebase Analytics
+##### - Next.Js
+##### - Tailwind CSS
+##### - Supabase Authentication
+##### - Contentful CMS
+##### - Firebase Analytics
 
 
 ### Here is all about the Application
--Landing page having hero card and carousel data getting from CMS.
--Signup page where you can signup with email magic link.
--Login page where you can login with email and password, Google and github.
--Recipes page fetching data from CMS.
--Single Recipe page having full details of item getting from CMS.
--About page having details of Recipe.
--Contact page Where you can contact us by filling the Form.
+##### -Landing page having hero card and carousel data getting from CMS.
+##### -Signup page where you can signup with email magic link.
+##### -Login page where you can login with email and password, Google and github.
+##### -Recipes page fetching data from CMS.
+##### -Single Recipe page having full details of item getting from CMS.
+##### -About page having details of Recipe.
+##### -Contact page Where you can contact us by filling the Form.
 
 
 ### Landing Page
