@@ -66,6 +66,7 @@ const Navbar = () => {
                 onClick={() => {
                   setOpen(!open)
                   logEvent(analytics,'Fired event: on Contacts')
+                  {!serverSession && alert('Please login first')}
                 }}
               >
                 Contact
@@ -77,6 +78,7 @@ const Navbar = () => {
                 onClick={() => {
                   setOpen(!open)
                   logEvent(analytics,'Fired event: on Recipes')
+                  {!serverSession && alert('Please login first')}
                 }}
               >
                 Recipes
