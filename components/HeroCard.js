@@ -24,7 +24,7 @@ const HeroCard = () => {
           </div>
           <div className="flex w-full md:w-2/5 mx-auto justify-center items-center ">
             <Image
-              src="https://demo.wpthemego.com/themes/sw_appetit/wp-content/uploads/2018/04/7.png"
+              src="https://i.ibb.co/b7nhQmq/Hero-Image.png"
               alt="Hero Image"
               width={450}
               height={450}
